@@ -106,12 +106,17 @@ void agregarTipoUsuario() {
     
     //insetar el tipo de usuario segun la prioridad
     //TipoUsuario nuevoTipoUsuario = TipoUsuario(descripcion, prioridad);
+    try {
+        controlPrincipal->agregarTipoUsuarioAdmin(descripcion, prioridad);
+
+        cout << "\n\tUsuario agregado exitosamente!";
+        controlPrincipal->getTiposAdmin()->print("Tipos de usuario");
+    }
+    catch(const std::runtime_error& e){
+        cout << e.what();
+    }
+
     
-    controlPrincipal->agregarTipoUsuarioAdmin(descripcion, prioridad);
-
-    cout << "\n\tUsuario agregado exitosamente!";
-
-    controlPrincipal->getTiposAdmin()->print("Tipos de usuario");
     _getch();
     system("cls");
 
@@ -194,10 +199,16 @@ void agregarArea() {
     cin >> codigo; //verificar que en la lista de areas no haya una con codigo igual
     cout << "\n\tCantidad de Ventanillas: ";
     cin >> cantVentanillas; 
-
-    controlPrincipal->agregarArea(descripcion, codigo, cantVentanillas);
-    cout << "\n\n\tÁrea agregada exitosamente!";
-    controlPrincipal->getAreas()->print("Áreas");
+    try {
+        controlPrincipal->agregarArea(descripcion, codigo, cantVentanillas);
+        cout << "\n\n\tÁrea agregada exitosamente!";
+        controlPrincipal->getAreas()->print("Áreas");
+    }
+    catch (const std::runtime_error& e) {
+        cout << e.what();
+    }
+    
+    
     _getch();
     system("cls");
 }
@@ -241,9 +252,15 @@ void modificarVentanillasArea() {
             controlPrincipal->getAreas()->next();
         }
         Area& areaToManip = controlPrincipal->getAreas()->getElement();
-        areaToManip.setCantVentanillas(cantVentanillas);
-        cout << "\n\n\tArea editada exitosamente!\n";
-        controlPrincipal->getAreas()->print("Áreas");
+        try {
+            areaToManip.setCantVentanillas(cantVentanillas);
+            cout << "\n\n\tArea editada exitosamente!\n";
+            controlPrincipal->getAreas()->print("Áreas");
+        }
+        catch (const std::runtime_error& e) {
+            cout << e.what();
+        }
+        
     }
     _getch();
     system("cls");
@@ -362,9 +379,15 @@ void agregarServicio() {
         }
         Area& areaToManip = controlPrincipal->getAreas()->getElement();
         Area* areaToManipPtr = &areaToManip;
-        controlPrincipal->agregarServicio(descripcion, areaToManipPtr, prioridad);
-        cout << "\n\n\tServicio agregado exitosamente!";
-        controlPrincipal->getServicios()->print("Servicios");
+        try {
+            controlPrincipal->agregarServicio(descripcion, areaToManipPtr, prioridad);
+            cout << "\n\n\tServicio agregado exitosamente!";
+            controlPrincipal->getServicios()->print("Servicios");
+        }
+        catch (const std::runtime_error& e) {
+            cout << e.what();
+        }
+        
     }
     _getch();
     system("cls");

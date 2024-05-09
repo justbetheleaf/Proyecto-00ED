@@ -58,6 +58,9 @@ public:
 		return tiquetes;
 	}
 	void setCantVentanillas(int cantVentanas) {
+		if (cantVentanas < 0) {
+			throw runtime_error("La nueva cantidad de ventanillas debe de ser positiva");
+		}
 		this->numVentana = 0;
 		ventanillas->clear();
 		this->cantVentanas = cantVentanas;

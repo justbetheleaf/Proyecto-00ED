@@ -38,6 +38,9 @@ public:
 
 	//metodos TipoUsuario//
 	void agregarTipoUsuarioAdmin(string descripcion, int prioridad) {
+		if (prioridad < 0) {
+			throw runtime_error("La prioridad debe de ser un numero positivo");
+		}
 		tiposAdmin->goToStart();
 		//recorre la lista de tipos de usuarios para agregar el elemento segun la prioridad
 		for (int i = 0; i < tiposAdmin->getSize(); ++i) {
@@ -54,10 +57,16 @@ public:
 
 	//metodos Area//
 	void agregarArea(string descripcion, string codigo, int cantVentanillas) {
+		if (cantVentanillas < 0) {
+			throw runtime_error("La cantidad de ventanillas debe de ser un numero positivo");
+		}
 		Area a = Area(descripcion, codigo, cantVentanillas);
 		areas->append(a);
 	}
 	void modificarCantidadVent(int numArea, int nuevaCantV) {
+		if (nuevaCantV < 0) {
+			throw runtime_error("La cantidad de ventanillas debe de ser un numero positivo");
+		}
 		areas->goToPos(numArea - 1);
 		Area a = areas->getElement();
 		a.setCantVentanillas(nuevaCantV);
@@ -69,6 +78,9 @@ public:
 		return servicios;
 	}
 	void agregarServicio(string descripcion, Area* area, int prioridad) {
+		if (prioridad < 0) {
+			throw runtime_error("La prioridad debe de ser un numero positivo");
+		}
 		servicios->goToStart();
 		//recorre la lista de servicios para agregar el elemento segun la prioridad
 		for (int i = 0; i < servicios->getSize(); ++i) {
